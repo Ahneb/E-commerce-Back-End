@@ -26,22 +26,22 @@ Product.init(
       validate: {
         isDecimal: true,
       },
-      stock: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 10,
-        validate: {
-          isNumeric: true,
-        },
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 10,
+      validate: {
+        isNumeric: true,
       },
-      category_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'Category',
-          key: 'id',
-        },
+    },
+    category_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Category',
+        key: 'id',
       },
-    }
+    },
   },
   {
     sequelize,
@@ -49,7 +49,7 @@ Product.init(
     freezeTableName: true,
     underscored: true,
     modelName: 'product',
-  }
+  },
 );
 
 Product.belongsTo(Category, {foreignKey: 'category_id'});

@@ -3,15 +3,23 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-// get all products
 router.get('/', (req, res) => {
   // find all products
+  Product.findAll().then((product) => {
+    res.send(product);
+  }).then(() => {
+    console.log('got all products');
+  });
   // be sure to include its associated Category and Tag data
 });
 
-// get one product
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
+  Product.findOne({where: { id: req.params.id } }).then((product) => {
+    res.send(product);
+  }).then(() => {
+    console.log('got all products by id');
+  });
   // be sure to include its associated Category and Tag data
 });
 
@@ -35,6 +43,7 @@ router.post('/', (req, res) => {
             tag_id,
           };
         });
+        console.log(productTagIdArr);
         return ProductTag.bulkCreate(productTagIdArr);
       }
       // if no product tags, just respond
